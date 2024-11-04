@@ -1,0 +1,65 @@
+import { useState } from 'react'
+import './App.css'
+
+function App() {
+  const [todos,setTodos]=useState([
+    {
+        title:"Go to gym",
+        desc: "Hit the gym regularly",
+        status:"false",
+    }
+]);
+
+function addTodo(){
+  //----------one way------
+  // let newArray=[...todos];
+  // newArray.push({
+  //   title:document.getElementById("title").value,
+  //   desc:document.getElementById("desc").value,
+  //   status:true
+
+  // })
+  // setTodos(newArray);
+
+  //------Another Way----
+  setTodos([...todos,{
+    title:document.getElementById("title").value,
+    desc:document.getElementById("desc").value,
+    status:true
+  }])
+}
+  return (
+    <>
+      <div>
+          <h1>Add Your Todo</h1>
+          <input id="title" placeholder='Enter the title'></input><br></br>
+          <input id="desc" placeholder='Enter the description'></input><br></br>
+          <button onClick={addTodo}>Add Todo</button>
+      </div>
+      
+      <div>
+        <h2>Your Previous Todos</h2>
+        {todos.map((todo,index)=>(
+          <Todo
+              key={index}
+              title={todo.title}
+              desc={todo.desc}
+          />   
+        ))}
+      </div>
+    </>
+  )
+
+  function Todo(props){
+    return(
+      <>
+        <h3>{props.title}</h3>
+        <h3>{props.desc}</h3>
+      </>
+    )
+    
+  }
+}
+
+
+export default App
